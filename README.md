@@ -13,16 +13,18 @@ pip install -r requirements
 ## Usage
 
 ```bash
-cd /directory/to/organize
-/path/to/script/format-ve.py
+~$ cd /directory/to/organize
+~$ /path/to/script/format-ve.py
 # Creates directories: 
-# Audio/ Footage/ Images/
+~$ ls
+Audio Footage Images
 ```
 
 Change names for directories
 ```bash
-cd /directory/to/organize
-/path/to/script/format-ve.py --audio=Music --video=Videos --image=IMG
+~$ cd /directory/to/organize
+~$ /path/to/script/format-ve.py --audio=Music --video=Videos --image=IMG
 # Creates directories: 
-# Music/ Videos/ IMG/
+~$ ls
+Music Videos IMG
 ```
