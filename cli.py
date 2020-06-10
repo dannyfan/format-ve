@@ -6,7 +6,7 @@ CLI used to organize files for video editing.
 import os
 import click
 
-from colorama import init, Fore 
+from colorama import init, Fore
 
 @click.command()
 @click.option("--audio", default="Audio", help="Directory name for mp3 files.",
@@ -40,29 +40,30 @@ def sort_files(directory_list):
     """ Sort files in root directory and move to appropiate directory."""
     files = [f for f in os.listdir('.') if os.path.isfile(f)]
     if len(files) == 0:
-        click.echo(Fore.YELLOW + f"No files found in directory!")
+        click.echo(Fore.YELLOW + "No files found in directory!")
 
     for fil in files:
-        NAME, EXTENSION = os.path.splitext(fil)
-        DIRECTORY = file_to_which_directory(EXTENSION, directory_list)
+        name, extension = os.path.splitext(fil)
+        directory = file_to_which_directory(extension, directory_list)
         # Extension doesn't exist so it would not be moved
-        if DIRECTORY is None:
+        if directory is None:
             continue
 
         try:
-            os.rename(fil, f"{DIRECTORY}/{fil}")
-            click.echo(Fore.LIGHTCYAN_EX + f"Moving {NAME} into {DIRECTORY} directory...")
+            os.rename(fil, f"{directory}/{fil}")
+            click.echo(Fore.LIGHTCYAN_EX + f"Moving {name} into {directory} directory...")
         except OSError:
-            click.echo(Fore.RED + f"Error moving into {NAME} {DIRECTORY} directory.")
+            click.echo(Fore.RED + f"Error moving into {name} {directory} directory.")
         else:
-            click.echo(Fore.GREEN + f"DONE! Successfully moved {NAME} into {DIRECTORY}.")
+            click.echo(Fore.GREEN + f"DONE! Successfully moved {name} into {directory}.")
 
 def create_directory(directory_list):
     """ Create directories with name provided. """
     for directory in directory_list:
         exists = os.path.isdir(directory)
         if exists:
-            click.echo(Fore.YELLOW + f"Skipping creation of {directory} directory. Directory already exists.")
+            click.echo(Fore.YELLOW +
+                       f"Skipping creation of {directory} directory. Directory already exists.")
             continue
         try:
             os.mkdir(directory)
