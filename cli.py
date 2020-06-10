@@ -33,7 +33,8 @@ def sort_files(directory_list):
     for f in files:
         name, extension = os.path.splitext(f)
         directory = file_to_which_directory(extension, directory_list)
-
+        print(name)
+        print(extension)
         # Extension doesn't exist so it would not be moved
         if directory is None:
             pass
@@ -49,6 +50,10 @@ def sort_files(directory_list):
 
 def create_directory(directory_list):
     for directory in directory_list:
+        exists = os.path.isdir(directory)
+        if (exists):
+            click.echo(f"Skipping creation of {directory} directory. Directory already exists.")
+            continue
         try:
             os.mkdir(directory)
             click.echo(f"Creating {directory} directory...")
